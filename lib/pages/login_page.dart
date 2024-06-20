@@ -21,32 +21,31 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   void signUserIn() async {
-  // mostrar circulo de carga
-  showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      });
-  // inicio sesion
-  try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim());
-    //pop al circulo de carga
-    Navigator.pop(context);
-    
-    // Navegar al HomePage después de un inicio de sesión exitoso
-    Navigator.pushReplacementNamed(context, '/home');
-  } on FirebaseAuthException catch (e) {
-    //pop al circulo de carga
-    Navigator.pop(context);
-    // mostrar mensaje de error
-    showErrorMessage(e.code);
-  }
-}
+    // mostrar circulo de carga
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+    // inicio sesion
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+      //pop al circulo de carga
+      Navigator.pop(context);
 
+      // Navegar al HomePage después de un inicio de sesión exitoso
+      Navigator.pushReplacementNamed(context, '/home');
+    } on FirebaseAuthException catch (e) {
+      //pop al circulo de carga
+      Navigator.pop(context);
+      // mostrar mensaje de error
+      showErrorMessage(e.code);
+    }
+  }
 
   // wrong email message popup
   void showErrorMessage(String message) {
@@ -85,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   // bienvenido
                   Text(
-                    "¡Bienvenido! <3",
+                    "¡Bienvenido!",
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontSize: 16,
